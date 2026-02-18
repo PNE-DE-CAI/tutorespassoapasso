@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Missões - Tutores Gameficado 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        /* Header com logo */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #ffd700;
+            flex-wrap: wrap;
+        }
+
+        .logo img {
+            max-height: 90px;
+            width: auto;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            color: #1e3c72;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(255,215,0,0.3);
+        }
+
+        .header h1 small {
+            font-size: 1rem;
+            color: #666;
+            display: block;
+            font-weight: 400;
+        }
+
+        /* Formulário de identificação */
+        .id-section {
+            background: linear-gradient(145deg, #f6f9fc, #e6f0f5);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            border: 2px solid #ffd700;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 0.95rem;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e0;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background-color: white;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255,215,0,0.2);
+        }
+
+        /* Grid de missões */
+        .missoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .missao-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 2px solid #e2e8f0;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .missao-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+
+        .missao-titulo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #cbd5e0;
+        }
+
+        .missao-titulo h2 {
+            color: #1e3c72;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .missao-titulo .pts-badge {
+            background: #ffd700;
+            color: #1e3c72;
+            padding: 5px 12px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .tarefa-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            border-radius: 12px;
+            transition: background-color 0.2s;
+            margin-bottom: 8px;
+        }
+
+        .tarefa-item:hover {
+            background-color: #f7fafc;
+        }
+
+        .tarefa-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: #ffd700;
+        }
+
+        .tarefa-item label {
+            flex: 1;
+            color: #2d3748;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .tarefa-item .pts-tarefa {
+            background: #e2e8f0;
+            color: #1e3c72;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .observacao-field {
+            margin-left: 35px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .observacao-field input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: #f8fafc;
+        }
+
+        .observacao-field input:focus {
+            outline: none;
+            border-color: #ffd700;
+            background: white;
+        }
+
+        /* Placar */
+        .placar-section {
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            padding: 25px;
+            border-radius: 25px;
+            margin: 30px 0;
+            color: white;
+            border: 3px solid #ffd700;
+        }
+
+        .placar-titulo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .placar-titulo h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .placar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .placar-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .placar-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .placar-item .valor {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+        }
+
+        .placar-equipe {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 25px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffb347);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Botões */
+        .btn-salvar {
+            background: linear-gradient(135deg, #ffd700, #ffb347);
+            color: #1e3c72;
+            border: none;
+            padding: 18px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin: 20px 0;
+            border: 2px solid white;
+        }
+
+        .btn-salvar:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.4);
+        }
+
+        .regras {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 20px;
+            border-left: 8px solid #ffd700;
+            margin-top: 20px;
+        }
+
+        .regras h3 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .regras ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .regras li {
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .regras li:before {
+            content: "🎮";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Status message */
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+            display: block;
+        }
+
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .missoes-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="Logo 3DE">
+            </div>
+            <h1>GUIA DE MISSÕES<br><small>Professor Tutor • Versão Gameficada 2026</small></h1>
+        </div>
+
+        <!-- Seção de Identificação -->
+        <div class="id-section">
+            <div class="form-group">
+                <label>📍 Escola:</label>
+                <select id="escola" required>
+                    <option value="">Selecione a escola</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>👤 Nome do Tutor:</label>
+                <input type="text" id="tutor" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="form-group">
+                <label>📚 Disciplina:</label>
+                <select id="disciplina" required>
+                    <option value="">Selecione</option>
+                    <option value="MT - Horizonte">MT - Horizonte</option>
+                    <option value="LP - Horizonte">LP - Horizonte</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Grid de Missões -->
+        <div class="missoes-grid" id="missoesContainer">
+            <!-- As missões serão inseridas via JavaScript -->
+        </div>
+
+        <!-- Placar da Equipe -->
+        <div class="placar-section">
+            <div class="placar-titulo">
+                <h2>📊 PLACAR </h2>
+            </div>
+            <div class="placar-grid">
+                <div class="placar-item">
+                    <div class="label">Missão 1</div>
+                    <div class="valor" id="ptsMissao1">0</div>
+                </div>
+                <div class="placar-item">
+                    <div class="label">Missão 2</div>
+                    <div class="valor" id="ptsMissao2">0</div>
+                </div>
+                <div class="placar-item">
+                    <div class="label">Missão 3</div>
+                    <div class="valor" id="ptsMissao3">0</div>
+                </div>
+                <div class="placar-item">
+                    <div class="label">Missão 4</div>
+                    <div class="valor" id="ptsMissao4">0</div>
+                </div>
+                <div class="placar-item">
+                    <div class="label">Missão 5</div>
+                    <div class="valor" id="ptsMissao5">0</div>
+                </div>
+                <div class="placar-item">
+                    <div class="label">Missão Final</div>
+                    <div class="valor" id="ptsMissaoFinal">0</div>
+                </div>
+            </div>
+            <div class="placar-equipe">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>TOTAL:</span>
+                    <span style="font-size: 2rem; font-weight: 700; color: #ffd700;" id="totalPontos">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%;"></div>
+                </div>
+                <div style="text-align: right; margin-top: 5px;">Meta: 100 pontos</div>
+            </div>
+        </div>
+
+        <!-- Regras do Jogo -->
+        <div class="regras">
+            <h3>🎲 REGRAS DO JOGO</h3>
+            <ul>
+                <li>Cada tarefa concluída vale 5 pontos (quando todas da missão estão completas, ganha 10pts bônus)</li>
+                <li>Todos vencem quando a equipe completa todas as missões</li>
+                <li>Objetivo final: 100 pontos coletivos</li>
+                <li>Colaboração vale bônus simbólico</li>
+                <li>Parabéns por avançar de fase e apoiar a aprendizagem dos estudantes!</li>
+            </ul>
+        </div>
+
+        <!-- Botão Salvar -->
+        <button class="btn-salvar" id="btnSalvar">💾 SALVAR PROGRESSO DA MISSÃO</button>
+
+        <!-- Status Message -->
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+
+    <script>
+        // Lista de escolas (fornecida pelo usuário)
+        const escolas = [
+            "ADAIL JARBAS DUCLOS", "ALBERTO GRAF CAPITAO", "ALFRIED THEODOR WEISZFLOG",
+            "ARMANDO SESTINI", "ARTHUR WEINGRILL", "AZEVEDO SOARES", "BAIRRO DO ITAIM",
+            "BAIRRO JUNDIAIZINHO", "BELEM DA SERRA", "BENEDITO APARECIDO TAVARES PROF",
+            "BUENO DE AZEVEDO FILHO PROF", "CARLOS AUGUSTO DE PADUA FLEURY PROF",
+            "CELESTINA VALENTE LENGENFELDER PROFA", "DOMINGOS CAMBIAGHI PROF",
+            "DR NELSON MANZANARES", "ELVIRA PARADA MANGA PROFA",
+            "FRANCISCO GONCALVES VIEIRA PROF", "HERMELINA DE ALBUQUERQUE PASSARELLA PROFA",
+            "IRACI SARTORI VIEIRA DA SILVA PROFA", "ISAURA DE MIRANDA BOTTO PROFA",
+            "ISAURA VALENTINI HANSER PROFA", "IVONE DOS ANJOS DA SILVA CAMPOS PROFA",
+            "JARDIM SAO FRANCISCO", "JOSE CARLOS DA SILVA JUNIOR", "JOSE PARADA PROFESSOR",
+            "JOSE ROBERTO MELCHIOR DR", "LENITA CORREA CAMARGO PROFA",
+            "LUIZ ALEXANDRE DOS SANTOS VEREADOR", "LYDIA SCALET WALKER PROFA",
+            "MARIA ZEZA GOMES DE OLIVEIRA", "NAIR HANNICKEL ROMARO",
+            "NIDE ZAIM CARDOSO PROFA", "OZILDE ALBUQUERQUE PASSARELLA DR",
+            "PAULO DUARTE", "PEDRO GALRAO DO NASCIMENTO", "PEDRO LELIS DE SOUZA PREFEITO",
+            "PIETRO PETRI", "RITUCO MITANI PROFA", "ULYSSES SANCHES RAMIRES PROF",
+            "VINCENZO LOBASSI", "AFONSO MORENO", "APARECIDO ROBERTO TONELLOTTI PROFESSOR",
+            "CHACARA CAMPONESA JARDIM VASSOURAS", "DR MARIO TOLEDO DE MORAES",
+            "JARDIM ALEGRIA II", "JARDIM DAS ROSAS", "JARDIM SILVIA II",
+            "JOCIMARA VIEIRA DA SILVA PROFA", "JOSE DE BARROS MARTINS EDITOR",
+            "KATIA MARIA TARIFA LEME TONELLI PROFA", "PARQUE CENTO E VINTE II",
+            "PEDRO PAULO DE AGUIAR", "ROGERIO LEVORIN PROF", "ZILTON BICUDO PROF"
+        ].sort();
+
+        // Estrutura das missões baseada no PDF
+        const missoes = [
+            {
+                nome: "MISSÃO 1 — Integração Escolar",
+                periodo: "02–06/02",
+                pts: 10,
+                tarefas: [
+                    { descricao: "Conhecer equipe gestora", pts: 5 },
+                    { descricao: "Conversar com professores", pts: 5 },
+                    { descricao: "Observar aulas", pts: 5 }
+                ]
+            },
+            {
+                nome: "MISSÃO 2 — Diagnóstico",
+                periodo: "09–13/02",
+                pts: 10,
+                tarefas: [
+                    { descricao: "Organizar aplicação", pts: 5 },
+                    { descricao: "Orientar estudantes", pts: 5 },
+                    { descricao: "Registrar ocorrências", pts: 5 }
+                ]
+            },
+            {
+                nome: "MISSÃO 3 — Planejamento",
+                periodo: "18–20/02",
+                pts: 10,
+                tarefas: [
+                    { descricao: "Ler documento orientador", pts: 5 },
+                    { descricao: "Explorar materiais", pts: 5 },
+                    { descricao: "Acessar portal", pts: 5 }
+                ]
+            },
+            {
+                nome: "MISSÃO 4 — Observação Pedagógica",
+                periodo: "23/02–03/03",
+                pts: 10,
+                tarefas: [
+                    { descricao: "Identificar estratégias", pts: 5 },
+                    { descricao: "Mapear participação", pts: 5 },
+                    { descricao: "Anotar dificuldades", pts: 5 }
+                ]
+            },
+            {
+                nome: "MISSÃO 5 — Enturmação",
+                periodo: "04–06/03",
+                pts: 10,
+                tarefas: [
+                    { descricao: "Analisar resultados", pts: 5 },
+                    { descricao: "Separar níveis", pts: 5 },
+                    { descricao: "Validar turmas", pts: 5 }
+                ]
+            },
+            {
+                nome: "MISSÃO FINAL — Tutoria",
+                periodo: "09/03+",
+                pts: 20,
+                tarefas: [
+                    { descricao: "Iniciar aulas", pts: 5 },
+                    { descricao: "Acompanhar progresso", pts: 5 },
+                    { descricao: "Registrar evidências", pts: 5 }
+                ]
+            }
+        ];
+
+        // Função para popular escolas no select
+        function popularEscolas() {
+            const select = document.getElementById('escola');
+            escolas.forEach(escola => {
+                const option = document.createElement('option');
+                option.value = escola;
+                option.textContent = escola;
+                select.appendChild(option);
+            });
+        }
+
+        // Função para criar as missões no HTML
+        function criarMissoes() {
+            const container = document.getElementById('missoesContainer');
+            
+            missoes.forEach((missao, index) => {
+                const missaoCard = document.createElement('div');
+                missaoCard.className = 'missao-card';
+                missaoCard.dataset.missao = index;
+                
+                // Título da missão
+                const titulo = document.createElement('div');
+                titulo.className = 'missao-titulo';
+                titulo.innerHTML = `
+                    <h2>${missao.nome}</h2>
+                    <span class="pts-badge">${missao.periodo} • ${missao.pts}pts</span>
+                `;
+                missaoCard.appendChild(titulo);
+                
+                // Tarefas
+                missao.tarefas.forEach((tarefa, tarefaIndex) => {
+                    const tarefaId = `missao_${index}_tarefa_${tarefaIndex}`;
+                    
+                    const tarefaDiv = document.createElement('div');
+                    tarefaDiv.className = 'tarefa-item';
+                    tarefaDiv.innerHTML = `
+                        <input type="checkbox" id="${tarefaId}" class="tarefa-checkbox" data-missao="${index}" data-tarefa="${tarefaIndex}">
+                        <label for="${tarefaId}">${tarefa.descricao}</label>
+                        <span class="pts-tarefa">${tarefa.pts}pts</span>
+                    `;
+                    missaoCard.appendChild(tarefaDiv);
+                    
+                    // Campo de observação
+                    const obsDiv = document.createElement('div');
+                    obsDiv.className = 'observacao-field';
+                    obsDiv.innerHTML = `
+                        <input type="text" id="obs_${tarefaId}" placeholder="Observações..." class="obs-input" data-missao="${index}" data-tarefa="${tarefaIndex}">
+                    `;
+                    missaoCard.appendChild(obsDiv);
+                });
+                
+                container.appendChild(missaoCard);
+            });
+            
+            // Adicionar event listeners para checkboxes
+            document.querySelectorAll('.tarefa-checkbox').forEach(cb => {
+                cb.addEventListener('change', calcularPontuacao);
+            });
+        }
+
+        // Função para calcular pontuação
+        function calcularPontuacao() {
+            let totalGeral = 0;
+            
+            missoes.forEach((missao, missaoIndex) => {
+                const checkboxes = document.querySelectorAll(`.tarefa-checkbox[data-missao="${missaoIndex}"]`);
+                const totalTarefas = checkboxes.length;
+                const marcadas = Array.from(checkboxes).filter(cb => cb.checked).length;
+                
+                // Pontos das tarefas (5pts cada)
+                const pontosTarefas = marcadas * 5;
+                
+                // Bônus se todas as tarefas da missão estiverem marcadas (mais 10pts)
+                const bonus = (marcadas === totalTarefas && totalTarefas > 0) ? 10 : 0;
+                
+                // Total da missão (pode exceder o máximo do PDF, mas mostra progresso)
+                const totalMissao = pontosTarefas + bonus;
+                
+                // Atualizar display
+                document.getElementById(`ptsMissao${missaoIndex + 1}`).textContent = totalMissao;
+                
+                totalGeral += totalMissao;
+            });
+            
+            // Atualizar total e barra de progresso
+            document.getElementById('totalPontos').textContent = totalGeral;
+            const progresso = Math.min((totalGeral / 100) * 100, 100);
+            document.getElementById('progressBar').style.width = `${progresso}%`;
+        }
+
+        // Função para coletar todos os dados
+        function coletarDados() {
+            const dados = {
+                timestamp: new Date().toLocaleString('pt-BR'),
+                escola: document.getElementById('escola').value,
+                tutor: document.getElementById('tutor').value,
+                disciplina: document.getElementById('disciplina').value,
+                missoes: [],
+                observacoes: []
+            };
+            
+            // Coletar status das missões
+            missoes.forEach((missao, missaoIndex) => {
+                const tarefas = [];
+                document.querySelectorAll(`.tarefa-checkbox[data-missao="${missaoIndex}"]`).forEach(cb => {
+                    tarefas.push(cb.checked ? 1 : 0);
+                });
+                dados.missoes.push(tarefas.join(','));
+            });
+            
+            // Coletar observações
+            document.querySelectorAll('.obs-input').forEach(obs => {
+                if (obs.value.trim()) {
+                    dados.observacoes.push(obs.value);
+                }
+            });
+            
+            dados.totalPontos = document.getElementById('totalPontos').textContent;
+            
+            return dados;
+        }
+
+        // Função para salvar no Google Sheets
+        async function salvarNoGoogleSheets(dados) {
+            const googleScriptURL = 'https://script.google.com/macros/s/SEU_ID_AQUI/exec';
+            
+            try {
+                const response = await fetch(googleScriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dados)
+                });
+                
+                return { success: true, message: 'Progresso salvo com sucesso!' };
+            } catch (error) {
+                return { success: false, message: 'Erro ao salvar. Tente novamente.' };
+            }
+        }
+
+        // Event listener para o botão salvar
+        document.getElementById('btnSalvar').addEventListener('click', async () => {
+            const escola = document.getElementById('escola').value;
+            const tutor = document.getElementById('tutor').value;
+            const disciplina = document.getElementById('disciplina').value;
+            
+            if (!escola || !tutor || !disciplina) {
+                mostrarStatus('Preencha todos os dados de identificação!', 'error');
+                return;
+            }
+            
+            const dados = coletarDados();
+            const resultado = await salvarNoGoogleSheets(dados);
+            
+            mostrarStatus(resultado.message, resultado.success ? 'success' : 'error');
+        });
+
+        function mostrarStatus(msg, tipo) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = msg;
+            statusDiv.className = `status-message ${tipo}`;
+            
+            if (tipo !== 'error') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            popularEscolas();
+            criarMissoes();
+        });
+    </script>
+</body>
+</html>
